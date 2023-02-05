@@ -28,17 +28,18 @@ function CustomSelect(props: inputTypes) {
         onChange={OnChange}
         {...restProps}
       >
-        {items.map((SelectItem) => (
+        {items?.map((SelectItem) => (
           <MenuItem key={SelectItem.value} value={SelectItem.value}>
             <Box
               sx={{
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
+                alignItems: "center",
                 width: "100%",
               }}
             >
-              {SelectItem.value}{" "}
+              <Typography variant="caption">{SelectItem.value}</Typography>
               <Avatar
                 sx={{
                   width: 24,
@@ -47,7 +48,15 @@ function CustomSelect(props: inputTypes) {
                   bgcolor: SelectItem.badgeColor,
                 }}
               >
-                <Typography variant="body2">
+                <Typography
+                  variant="caption"
+                  sx={{
+                    color:
+                      SelectItem.badgeColor === "grey.300"
+                        ? "common.black"
+                        : "common.white",
+                  }}
+                >
                   {SelectItem.badgeNumber}
                 </Typography>
               </Avatar>

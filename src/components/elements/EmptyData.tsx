@@ -13,16 +13,19 @@ function EmptyData(props: emptyDataType) {
     <Box
       sx={{
         display: "flex",
-        flexDirection:"column",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         p: 6,
+        backgroundColor: "common.white",
+        borderRadius: "4px",
+        mt: 3,
       }}
     >
       <Avatar sx={{ bgcolor: "info.main", p: 3, pl: 3.7 }}>{icon}</Avatar>
       <Typography
         variant="body1"
-        sx={{ fontWeight: "bold", mt:3, mb:1 }}
+        sx={{ fontWeight: "bold", mt: 3, mb: 1 }}
         color={"common.dark"}
       >
         {title}

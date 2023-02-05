@@ -19,7 +19,7 @@ function CustomInput(props: inputTypes) {
         justifyContent: "space-between",
         borderRadius: 10,
         backgroundColor: "grey.200",
-        pl:  2
+        pl: 2,
       }}
     >
       {leftIcon}
@@ -30,7 +30,7 @@ function CustomInput(props: inputTypes) {
               border: "none",
             },
           },
-          width: small ? "10rem" : "18rem"
+          width: small ? "10rem" : { xs: "8rem", sm: "10rem", md: "18rem" },
         }}
         color="primary"
         size="small"

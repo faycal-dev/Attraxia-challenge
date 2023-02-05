@@ -10,6 +10,7 @@ type HeaderType = {
   headerType?: "button" | "filters" | "none";
   buttonText?: string;
   buttonIcon?: React.ReactNode;
+  SelectItems?: { value: string; badgeNumber: number; badgeColor: string }[];
   handleButtonClick?: () => void;
   SelectChangeHandler?: (event: SelectChangeEvent) => void;
   SearchInputChangeHandler?: (
@@ -23,6 +24,7 @@ function Header(props: HeaderType) {
     buttonText,
     headerType = "button",
     buttonIcon,
+    SelectItems = [{ value: "empty", badgeNumber: 0, badgeColor: "grey.200" }],
     handleButtonClick,
     SelectChangeHandler,
     SearchInputChangeHandler,
@@ -32,7 +34,7 @@ function Header(props: HeaderType) {
       sx={{
         p: "1.5rem",
         display: "flex",
-        flexDirection: "row",
+        flexDirection: { xs: "column", sm: "column", md: "row" },
         alignItems: "center",
         justifyContent: "space-between",
         borderBottom: "1px solid #EDEDED",
@@ -48,7 +50,11 @@ function Header(props: HeaderType) {
       </Typography>
       {headerType === "button" && (
         <Box
-          sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", sm: "column", md: "row" },
+            alignItems: "center",
+          }}
         >
           <Typography variant="body2" color={"grey.600"}>
             Need Help?
@@ -67,15 +73,13 @@ function Header(props: HeaderType) {
       )}
       {headerType === "filters" && (
         <Box
-          sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", sm: "column", md: "row" },
+            alignItems: "center",
+          }}
         >
-          <CustomSelect
-            OnChange={SelectChangeHandler}
-            items={[
-              { value: "All Tickets", badgeNumber: 10, badgeColor: "grey.300" },
-              { value: "Open", badgeNumber: 10, badgeColor: "success.main" },
-            ]}
-          />
+          <CustomSelect OnChange={SelectChangeHandler} items={SelectItems} />
           <CustomInput
             placeholder="Search Tickets"
             OnChange={SearchInputChangeHandler}
