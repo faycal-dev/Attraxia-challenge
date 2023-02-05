@@ -14,9 +14,11 @@ import UseStatusCount from "../../CustomHooks/UseStatusCount";
 let COLUMNS = ["TICKET", "STATUS", "CRATED ON", "REPLIES"];
 
 function Tickets() {
-  const { isLoading, data } = UseFetch();
+  const [page, setPage] = useState(1);
   const [filteredData, setFiltredData] = useState<TableDataType | undefined>();
   const [searchValue, setSearchValue] = useState("");
+
+  const { isLoading, data, numberOfPages } = UseFetch(page);
   const STATUS_OPTIONS = UseStatusCount(data);
 
   const filter = (
@@ -30,6 +32,14 @@ function Tickets() {
       data: data,
     });
     setFiltredData(filteredData);
+  };
+
+  const handlePagination = (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
+    setPage(page);
+    setFiltredData(undefined);
   };
 
   if (isLoading) {
@@ -74,8 +84,10 @@ function Tickets() {
         )}
       </Box>
       <Pagination
-        count={4}
+        count={numberOfPages}
         size="small"
+        page={page}
+        onChange={handlePagination}
         sx={{
           mt: 2,
           display:
